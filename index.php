@@ -7,7 +7,7 @@ session_start();
       header("Location: developer/dashboard.php");
    }
  } else{
-    header("Location: login.php");
+    header("Location: ../auth/login.php");
  }
  exit();
 

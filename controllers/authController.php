@@ -12,7 +12,7 @@ $password=$_POST['password'];
 
     $stmt=$pdo->prepare("INSERT INTO users(username,email,password,role) VALUES (?, ?, ?,'developer' )");
     $stmt->execute([$username, $email, $hashed_password]);
-    header("Location: ../includes/login.php"); //redirect to login page after successful registration
+    header("Location: ../auth/login.php?success=Account created successfully"); //redirect to login page after successful registration
     exit();
     }
 
@@ -39,6 +39,13 @@ $user = $stmt->fetch(); //fetch the user data from the database
             header("Location:../developer/dashboard.php");
             exit();
         }
+    } else {
+        if(!$user) {
+
+            header("Location: ../auth/register.php?error=User not found");
+        } else {
+
+            header("Location: ../auth/login.php?error=Invalid credentials");
+        }
     }
 }
-?>

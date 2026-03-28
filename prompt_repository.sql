@@ -1,4 +1,4 @@
--- Active: 1774430071963@@127.0.0.1@3307
+-- Active: 1774611348182@@127.0.0.1@3306@phpmyadmin
 -- phpMyAdmin SQL Dump
 
 
@@ -35,9 +35,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL UNIQUE,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -58,12 +59,15 @@ INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
 --
 
 CREATE TABLE `prompts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -80,12 +84,13 @@ INSERT INTO `prompts` (`id`, `title`, `content`, `user_id`, `category_id`, `crea
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
-  `email` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL UNIQUE,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','developer') DEFAULT 'developer',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -100,48 +105,15 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`
 --
 
 --
--- Index pour la table `categories`
+-- Index pour les tables déchargées
 --
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Index pour la table `prompts`
---
-ALTER TABLE `prompts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `category_id` (`category_id`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
-
---
--- AUTO_INCREMENT pour la table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT pour la table `prompts`
---
-ALTER TABLE `prompts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `categories` AUTO_INCREMENT=8;
+ALTER TABLE `prompts` AUTO_INCREMENT=12;
+ALTER TABLE `users` AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées
