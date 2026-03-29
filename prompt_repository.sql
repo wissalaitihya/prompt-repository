@@ -1,6 +1,3 @@
--- Active: 1774611348182@@127.0.0.1@3306@phpmyadmin
--- phpMyAdmin SQL Dump
-
 
 
 CREATE DATABASE  IF NOT EXISTS prompt_repository

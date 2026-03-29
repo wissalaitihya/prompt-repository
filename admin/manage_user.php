@@ -8,33 +8,27 @@ $users = $pdo->query("SELECT * FROM users ORDER BY role ASC")->fetchAll();
 ?>
 
 <h2> Users Management</h2>
+<tr>
+<th>Username</th>
+<th>Email</th>
+<th>Role</th>
+<th>Action</th>
+</tr>
 
-<table border="1" style="width:100%; border-collapse: collapse;">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($users as $user): ?>
-        <tr>
-            <td><?= $user['username'] ?></td>            <td><?= $user['username'] ?></td>
-            <td><?= $user['email'] ?></td>
-            <td><?= $user['role'] ?></td>
-            <td>
-                <?php if($user['id'] !=$_SESSION['user_id'] ): ?>
-                <a href="../controllers/userController.php?selete_user_id=<?=$u['id'] ?>" style="color:red;">Supprimer</a>
-                <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn btn-delete">Delete</a>
-            
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
+<?php foreach($users as $u): ?>
+    <tr>
+        <td><?= htmlspecialchars($u['username']) ?></td>
+        <td><?= htmlspecialchars($u['email']) ?></td>
+        <td><strong><?= strtoupper($u['role']) ?></strong></td>
+        <td>
+            <?php if($u['id'] != $_SESSION['user_id']): ?>
+                <a href="../controllers/userController.php?delete_user_id=<?= $u['id'] ?>" style="color:red;">Supprimer</a>
+            <?php else: ?>
+                (Moi)
+            <?php endif; ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
 </table>
 
-
-<?php include '../includes/footer.php';?>
-?>
+<?php include '../includes/footer.php'; ?>

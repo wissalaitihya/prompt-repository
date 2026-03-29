@@ -307,7 +307,7 @@ require_once '../config/db.php';
                 <li><a href="../developer/dashboard.php"><i class="fas fa-chart-line icon-black"></i> Dashboard</a></li>
                 <li><a href="../developer/create_prompt.php"><i class="fas fa-plus icon-black"></i> Add Prompt</a></li>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                    <li><a href="../developer/categories.php"><i class="fas fa-cog icon-black"></i> Manage Categories</a></li>
+                    <li><a href="../admin/add_category.php"><i class="fas fa-cog icon-black"></i> Manage Categories</a></li>
                 <?php endif; ?>
 
                 <?php //else: ?>
