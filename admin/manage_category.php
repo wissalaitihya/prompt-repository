@@ -2,11 +2,46 @@
 require_once '../includes/auth.php'; 
 confirm_admin();
 require_once '../config/db.php';
-include '../includes/header.php';
 
 // Get categories
 $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    if(isset($_POST['confirm_delete'])){
+        $C = $_POST['id'];
+        try{
+            $stmt= $pdo->prepare("DELETE FROM categories WHERE id = ?");
+            $stmt->execute([$C]);
+            header("Location: manage_category.php");
+            exit();
+        }catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
+   
+    if(isset($_POST['add_category'])){
+        $name = $_POST["name"];
+        try{
+            $stmt= $pdo->prepare("INSERT INTO categories (name) VALUES (?)");
+            $stmt->execute([$name]);
+            header("Location: manage_category.php");
+            exit();
+        }catch(PDOException $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
+}
+
+
+
+include '../includes/header.php';
 ?>
+
+
+
+
 
 <style>
 @keyframes slideInUp {
@@ -24,254 +59,240 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    animation: slideInUp 0.6s ease-out;
 }
 
 .manage-header {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+    animation: slideInUp 0.6s ease-out;
 }
 
-.manage-header h2 {
-    font-size: 36px;
+.manage-header h1 {
+    font-size: 42px;
     background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 800;
     letter-spacing: -1px;
-    animation: slideInUp 0.6s ease-out 0.1s backwards;
 }
 
-/* Add Category Form */
+.manage-header > p {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
 .add-category-card {
     background: white;
     border-radius: 15px;
     padding: 30px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
-    border: 1px solid rgba(255, 107, 157, 0.2);
-    animation: slideInUp 0.6s ease-out 0.1s backwards;
-    transition: all 0.3s ease;
-}
-
-.add-category-card:hover {
-    box-shadow: 0 12px 40px rgba(255, 107, 157, 0.15);
-    border-color: rgba(255, 107, 157, 0.3);
+    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
+    border: 1px solid rgba(255, 107, 157, 0.1);
+    animation: slideInUp 0.7s ease-out 0.1s backwards;
 }
 
 .add-category-card h3 {
-    font-size: 18px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-weight: 700;
-    color: #1a1a1a;
     margin-bottom: 20px;
 }
 
 .form-group {
     display: flex;
     gap: 12px;
-    align-items: flex-end;
+    flex-wrap: wrap;
 }
 
 .form-group input {
     flex: 1;
+    min-width: 200px;
     padding: 12px 16px;
     border: 2px solid rgba(255, 107, 157, 0.2);
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 15px;
     font-family: inherit;
     transition: all 0.3s ease;
-    background: white;
 }
 
 .form-group input:focus {
     outline: none;
     border-color: #ff6b9d;
     box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
-    background: rgba(255, 107, 157, 0.02);
-}
-
-.form-group input::placeholder {
-    color: #999;
 }
 
 .form-group button {
-    padding: 12px 28px;
+    padding: 12px 24px;
     background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 14px;
     font-weight: 700;
+    font-size: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.25);
     white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-}
-
-.form-group button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
 }
 
 .form-group button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+    box-shadow: 0 6px 16px rgba(255, 107, 157, 0.35);
 }
 
-.form-group button:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.form-group button:active {
-    transform: translateY(0);
-}
-
-/* Categories Table */
 .table-card {
     background: white;
     border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
-    border: 1px solid rgba(255, 107, 157, 0.2);
+    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
+    border: 1px solid rgba(255, 107, 157, 0.1);
     overflow: hidden;
-    animation: slideInUp 0.6s ease-out 0.2s backwards;
-    transition: all 0.3s ease;
-}
-
-.table-card:hover {
-    box-shadow: 0 12px 40px rgba(255, 107, 157, 0.15);
-    border-color: rgba(255, 107, 157, 0.3);
+    animation: slideInUp 0.7s ease-out 0.2s backwards;
 }
 
 .table-card h3 {
-    font-size: 18px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 20px;
+    padding: 25px 30px 15px;
 }
 
-table {
+.table-card table {
     width: 100%;
     border-collapse: collapse;
 }
 
-table thead {
-    background: linear-gradient(135deg, rgba(255, 107, 157, 0.05) 0%, rgba(195, 74, 123, 0.05) 100%);
-    border-bottom: 2px solid rgba(255, 107, 157, 0.2);
+.table-card thead {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    color: white;
 }
 
-table th {
-    padding: 16px 12px;
+.table-card th {
+    padding: 18px 20px;
     text-align: left;
     font-weight: 700;
-    color: #1a1a1a;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-table tbody tr {
+.table-card td {
+    padding: 18px 20px;
     border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+    color: #333;
+    font-size: 15px;
+}
+
+.table-card tbody tr {
     transition: all 0.3s ease;
 }
 
-table tbody tr:hover {
+.table-card tbody tr:hover {
     background: rgba(255, 107, 157, 0.05);
+    transform: scale(1.01);
 }
 
-table td {
-    padding: 16px 12px;
-    color: #333;
-    font-size: 14px;
+.table-card tbody tr:last-child td {
+    border-bottom: none;
 }
 
-table td a {
+.btn-edit, .btn-delete {
     display: inline-block;
     padding: 8px 16px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
-    color: white;
-    text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     font-size: 13px;
     transition: all 0.3s ease;
+    text-decoration: none;
+    margin-right: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    color: white;
     box-shadow: 0 4px 12px rgba(255, 107, 157, 0.25);
 }
 
-table td a:hover {
+.btn-delete:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(255, 107, 157, 0.35);
 }
 
 .empty-state {
+    padding: 60px 30px;
     text-align: center;
-    padding: 60px 20px;
-    color: #999;
 }
 
 .empty-state p {
     font-size: 16px;
-    margin-bottom: 10px;
+    color: #999;
+    font-weight: 500;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .manage-header h2 {
-        font-size: 28px;
+    .manage-header h1 {
+        font-size: 32px;
     }
 
     .form-group {
         flex-direction: column;
-        align-items: stretch;
     }
 
-    .form-group button {
-        width: 100%;
+    .form-group input {
+        min-width: 100%;
     }
 
-    .add-category-card,
-    .table-card {
-        padding: 20px;
+    .table-card th,
+    .table-card td {
+        padding: 12px 10px;
+        font-size: 13px;
     }
 
-    table th,
-    table td {
-        padding: 12px 8px;
+    .table-card th {
         font-size: 12px;
     }
 
-    table td a {
+    .btn-edit, .btn-delete {
         padding: 6px 12px;
         font-size: 12px;
+        margin-bottom: 4px;
     }
 }
 </style>
 
 <main>
     <div class="manage-header">
-        <h2>📁 Manage Categories</h2>
+        <h1>📁 Manage Categories</h1>
+        <p>Create and manage content categories</p>
     </div>
 
     <!-- Add Category -->
     <div class="add-category-card">
         <h3>Add New Category</h3>
-        <form action="../controllers/categoryController.php" method="POST">
+        <form  method="POST">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Enter category name" required>
-                <button type="submit" name="add_category">+ Add</button>
+                <button type="submit" name="add_category">+ Add Category</button>
             </div>
         </form>
     </div>
@@ -294,8 +315,11 @@ table td a:hover {
                             <td><?php echo htmlspecialchars($c['id']); ?></td>
                             <td><?php echo htmlspecialchars($c['name']); ?></td>
                             <td>
-                                <a href="edit_category.php?id=<?php echo $c['id']; ?>">✏️ Edit</a>
-                                <a href="delete_category.php?id=<?= $c['id'] ?>">🗑️ Delete</a>
+                                <a href="../admin/edit_category.php?id=<?php echo $c['id']; ?>" class="btn-edit">✏️ Edit</a>
+                                <form  method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                    <input type="hidden" name="id" value="<?php echo $c['id']; ?>">
+                                    <button type="submit" name="confirm_delete" class="btn-delete">🗑️ Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php } ?>
@@ -303,7 +327,7 @@ table td a:hover {
             </table>
         <?php } else { ?>
             <div class="empty-state">
-                <p> No categories found. Create one to get started!</p>
+                <p>No categories found. Create one to get started!</p>
             </div>
         <?php } ?>
     </div>

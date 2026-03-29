@@ -2,12 +2,28 @@
 require_once '../includes/auth.php';
 confirm_logged_in();
 require_once '../config/db.php';
-include '../includes/header.php';
 
 $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
-?>
 
-<style>
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $category_id = $_POST['category_id'];
+    $user_id = $_SESSION['user_id'];
+    
+    try{
+        $stmt = $pdo->prepare('INSERT INTO prompts(title, content, category_id, user_id) VALUES (?, ?, ?, ?)');
+        $stmt->execute([$title, $content, $category_id, $user_id]);
+        header('Location: dashboard.php');
+        exit();
+    }catch(PDOException $e){
+        $error = "Error: " . $e->getMessage();
+    }
+}
+
+include '../includes/header.php';
+?>
+    <style>
     @keyframes slideInUp {
         from {
             opacity: 0;

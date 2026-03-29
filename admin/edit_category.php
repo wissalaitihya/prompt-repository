@@ -4,16 +4,37 @@ confirm_admin();
 require_once '../config/db.php';
 
 
-if(!isset($_GET['id'])) 
+if(!isset($_GET['id'])) {
     header('Location: manage_category.php');
+    exit();
+}
 
 $stmt = $pdo->prepare("SELECT * FROM categories WHERE id = ?");
 $stmt->execute([$_GET['id']]);
 $cat = $stmt->fetch();
 
+// Check if category exists
+if(!$cat) {
+    header('Location: manage_category.php');
+    exit();
+}
+
+// Handle update
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_category'])) {
+    $name = $_POST['name'];
+    $id = $_POST['id'];
+    
+    try {
+        $stmt = $pdo->prepare('UPDATE categories SET name = ? WHERE id = ?');
+        $stmt->execute([$name, $id]);
+        header('Location: manage_category.php');
+        exit();
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
 include '../includes/header.php';
-
-
 ?>
 
 <style>
@@ -295,7 +316,7 @@ input[type="hidden"] {
         <h2>✏️ Edit Category</h2>
         <p>Update the category name and save your changes</p>
         
-        <form action="../controllers/categoryController.php" method="POST" class="main-form">
+        <form  method="POST" class="main-form">
             <input type="hidden" name="id" value="<?= $cat['id'] ?>">
             
             <div class="form-group">
