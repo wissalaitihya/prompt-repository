@@ -44,6 +44,34 @@ include '../includes/header.php';
 
 
 <style>
+:root {
+    /* Couleurs */
+    --color-primary: #4f46e5;
+    --color-primary-dark: #4338ca;
+    --color-primary-light: #6366f1;
+    --color-secondary: #10b981;
+    --color-danger: #ef4444;
+    --color-background: #eef0f4;
+    --color-dark: #0b1120;
+    --color-gray-light: #f8fafc;
+    --color-gray-border: #e2e8f0;
+    --color-gray-text: #666666;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --radius-2xl: 24px;
+    
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -69,8 +97,8 @@ main {
 }
 
 .manage-header h1 {
-    font-size: 42px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -86,16 +114,16 @@ main {
 
 .add-category-card {
     background: white;
-    border-radius: 15px;
+    border-radius: var(--radius-xl);
     padding: 30px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
-    border: 1px solid rgba(255, 107, 157, 0.1);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-gray-border);
     animation: slideInUp 0.7s ease-out 0.1s backwards;
 }
 
 .add-category-card h3 {
-    font-size: 20px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 18px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -112,51 +140,51 @@ main {
 .form-group input {
     flex: 1;
     min-width: 200px;
-    padding: 12px 16px;
-    border: 2px solid rgba(255, 107, 157, 0.2);
-    border-radius: 10px;
-    font-size: 15px;
+    padding: 12px 14px;
+    border: 2px solid var(--color-gray-border);
+    border-radius: var(--radius-lg);
+    font-size: 14px;
     font-family: inherit;
     transition: all 0.3s ease;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #ff6b9d;
-    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-group button {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     font-weight: 700;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.25);
+    box-shadow: var(--shadow-md);
     white-space: nowrap;
 }
 
 .form-group button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(255, 107, 157, 0.35);
+    box-shadow: var(--shadow-lg);
 }
 
 .table-card {
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
-    border: 1px solid rgba(255, 107, 157, 0.1);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-gray-border);
     overflow: hidden;
     animation: slideInUp 0.7s ease-out 0.2s backwards;
 }
 
 .table-card h3 {
-    font-size: 20px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 18px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -170,7 +198,7 @@ main {
 }
 
 .table-card thead {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
 }
 
@@ -185,7 +213,7 @@ main {
 
 .table-card td {
     padding: 18px 20px;
-    border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+    border-bottom: 1px solid var(--color-gray-border);
     color: #333;
     font-size: 15px;
 }
@@ -195,7 +223,7 @@ main {
 }
 
 .table-card tbody tr:hover {
-    background: rgba(255, 107, 157, 0.05);
+    background: rgba(79, 70, 229, 0.05);
     transform: scale(1.01);
 }
 
@@ -205,10 +233,10 @@ main {
 
 .btn-edit, .btn-delete {
     display: inline-block;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 13px;
+    font-size: 11px;
     transition: all 0.3s ease;
     text-decoration: none;
     margin-right: 8px;
@@ -217,25 +245,25 @@ main {
 }
 
 .btn-edit {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     color: white;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-edit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-delete {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    background: linear-gradient(135deg, var(--color-danger) 0%, #dc2626 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.25);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-delete:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(255, 107, 157, 0.35);
+    box-shadow: var(--shadow-md);
 }
 
 .empty-state {

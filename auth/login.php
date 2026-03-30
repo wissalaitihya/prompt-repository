@@ -10,8 +10,39 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - PromptHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            /* Couleurs */
+            --color-primary: #4f46e5;
+            --color-primary-dark: #4338ca;
+            --color-primary-light: #6366f1;
+            --color-secondary: #10b981;
+            --color-danger: #ef4444;
+            --color-background: #eef0f4;
+            --color-dark: #0b1120;
+            --color-gray-light: #f8fafc;
+            --color-gray-border: #e2e8f0;
+            --color-gray-text: #666666;
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --radius-2xl: 24px;
+            
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -19,8 +50,8 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffe6f0 100%);
+            font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--color-background);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -37,7 +68,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
             left: 0;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             z-index: -1;
             animation: float 20s infinite ease-in-out;
@@ -50,7 +81,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
             right: -100px;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(195, 74, 123, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(11, 17, 32, 0.08) 0%, transparent 70%);
             border-radius: 50%;
             z-index: -1;
             animation: float-reverse 25s infinite ease-in-out;
@@ -90,10 +121,10 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         @keyframes glow {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 107, 169, 0.3), 0 20px 60px rgba(255, 107, 157, 0.15);
+                box-shadow: var(--shadow-lg) 0 0 20px rgba(79, 70, 229, 0.3);
             }
             50% {
-                box-shadow: 0 0 40px rgba(255, 107, 169, 0.5), 0 30px 80px rgba(255, 107, 157, 0.25);
+                box-shadow: var(--shadow-xl) 0 0 40px rgba(79, 70, 229, 0.5);
             }
         }
 
@@ -126,7 +157,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
         .brand-logo {
             font-size: 48px;
             font-weight: 900;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -149,10 +180,10 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         .card {
             background: white;
-            border-radius: 25px;
+            border-radius: var(--radius-2xl);
             padding: 50px;
-            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.15);
-            border: 2px solid rgba(255, 107, 157, 0.1);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-gray-border);
             position: relative;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -166,7 +197,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
             right: -50%;
             width: 200px;
             height: 200px;
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15) 0%, transparent 100%);
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, transparent 100%);
             border-radius: 50%;
             transition: all 0.6s ease;
             z-index: 0;
@@ -174,8 +205,8 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 30px 80px rgba(255, 107, 157, 0.25);
-            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(79, 70, 229, 0.2);
             animation: glow 2s ease-in-out;
         }
 
@@ -196,14 +227,14 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         .card-header h1 {
             font-size: 38px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-bottom: 12px;
-            text-shadow: 0 2px 10px rgba(255, 107, 157, 0.1);
+            text-shadow: var(--shadow-xs);
         }
 
         .card-header p {
@@ -237,7 +268,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
         }
 
         label i {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -247,13 +278,13 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
         input {
             width: 100%;
             padding: 15px 18px;
-            border: 2px solid #e8e8e8;
-            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            border: 2px solid var(--color-gray-border);
+            background: var(--color-gray-light);
             color: #1a1a1a;
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             font-size: 15px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 500;
         }
 
@@ -264,24 +295,24 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         input:focus {
             outline: none;
-            border-color: #ff6b9d;
+            border-color: var(--color-primary);
             background: white;
-            box-shadow: 0 0 25px rgba(255, 107, 157, 0.25), inset 0 1px 3px rgba(255, 107, 157, 0.1);
+            box-shadow: var(--shadow-md), inset 0 1px 3px rgba(79, 70, 229, 0.1);
             transform: translateY(-2px);
         }
 
         input:hover:not(:focus) {
-            border-color: #ffb3d9;
-            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.1);
+            border-color: rgba(79, 70, 229, 0.3);
+            box-shadow: var(--shadow-sm);
         }
 
         button {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
@@ -289,7 +320,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
             margin-top: 15px;
             position: relative;
             z-index: 1;
-            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.35);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
             text-transform: uppercase;
             letter-spacing: 1.2px;
             display: flex;
@@ -306,8 +337,8 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         button:hover {
             transform: translateY(-4px);
-            box-shadow: 0 18px 50px rgba(255, 107, 157, 0.45);
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b9d 100%);
+            box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
         }
 
         button:hover i {
@@ -316,7 +347,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
 
         button:active {
             transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            box-shadow: var(--shadow-md);
         }
 
         .error-message {
@@ -376,7 +407,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
         }
 
         .signup-link a {
-            color: #ff6b9d;
+            color: var(--color-primary);
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -391,12 +422,12 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : "";
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #ff6b9d 0%, #c34a7b 100%);
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .signup-link a:hover {
-            color: #c34a7b;
+            color: var(--color-primary-dark);
         }
 
         .signup-link a:hover::after {

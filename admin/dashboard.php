@@ -7,18 +7,37 @@ include '../includes/header.php';
 $userCount = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $promptCount = $pdo->query("SELECT COUNT(*) FROM prompts")->fetchColumn();
 $categoryCount = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn();
-
-$stmt = $pdo->query("
-    SELECT p.*, c.name as category_name, u.username 
-    FROM prompts p 
-    LEFT JOIN categories c ON p.category_id = c.id 
-    LEFT JOIN users u ON p.user_id = u.id 
-    ORDER BY p.id DESC
-");
-$prompts = $stmt->fetchAll();
 ?>
 
 <style>
+:root {
+    /* Couleurs */
+    --color-primary: #4f46e5;
+    --color-primary-dark: #4338ca;
+    --color-primary-light: #6366f1;
+    --color-secondary: #10b981;
+    --color-danger: #ef4444;
+    --color-background: #eef0f4;
+    --color-dark: #0b1120;
+    --color-gray-light: #f8fafc;
+    --color-gray-border: #e2e8f0;
+    --color-gray-text: #666666;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --radius-2xl: 24px;
+    
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -53,8 +72,8 @@ main {
 }
 
 .dashboard-header h1 {
-    font-size: 42px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -77,11 +96,11 @@ main {
 }
 
 .stat-card {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
-    border-radius: 15px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: var(--radius-xl);
     padding: 30px;
     color: white;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.25);
+    box-shadow: var(--shadow-lg);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     animation: slideInUp 0.6s ease-out backwards;
@@ -115,7 +134,7 @@ main {
 
 .stat-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(255, 107, 157, 0.35);
+    box-shadow: var(--shadow-xl);
 }
 
 .stat-title {
@@ -161,8 +180,8 @@ main {
 }
 
 .admin-section h2 {
-    font-size: 28px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 24px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -180,35 +199,38 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    border-radius: 15px;
+    padding: 12px 20px;
+    border-radius: var(--radius-xl);
     text-decoration: none;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(255, 107, 157, 0.2);
+    box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    min-height: 80px;
+    min-height: 60px;
     cursor: pointer;
 }
 
 .btn-category {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
 }
 
 .btn-category:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(255, 107, 157, 0.35);
+    box-shadow: var(--shadow-xl);
 }
 
 .btn-users {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, #059669 100%);
 }
 
 .btn-users:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.35);
+    box-shadow: 0 12px 32px rgba(16, 185, 129, 0.35);
+}
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(107, 114, 128, 0.35);
 }
 
 /* Responsive */
@@ -230,7 +252,6 @@ main {
     }
 }
 </style>
-
 
 <main>
     <div class="dashboard-header">

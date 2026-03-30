@@ -28,6 +28,34 @@ include '../includes/header.php';
 ?>
 
 <style>
+:root {
+    /* Couleurs */
+    --color-primary: #4f46e5;
+    --color-primary-dark: #4338ca;
+    --color-primary-light: #6366f1;
+    --color-secondary: #10b981;
+    --color-danger: #ef4444;
+    --color-background: #eef0f4;
+    --color-dark: #0b1120;
+    --color-gray-light: #f8fafc;
+    --color-gray-border: #e2e8f0;
+    --color-gray-text: #666666;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --radius-2xl: 24px;
+    
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
 @keyframes slideInUp {
     from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -38,8 +66,8 @@ main { display: flex; flex-direction: column; gap: 30px; }
 .dashboard-header { display: flex; flex-direction: column; gap: 10px; animation: slideInUp 0.6s ease-out; }
 
 .dashboard-header h1 {
-    font-size: 42px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 36px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -57,9 +85,9 @@ main { display: flex; flex-direction: column; gap: 30px; }
 }
 
 .card {
-    background: white; border-radius: 15px; padding: 30px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
-    border: 1px solid rgba(255, 107, 157, 0.2);
+    background: white; border-radius: var(--radius-xl); padding: 30px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-gray-border);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative; overflow: hidden;
     animation: slideInUp 0.6s ease-out backwards;
@@ -68,15 +96,15 @@ main { display: flex; flex-direction: column; gap: 30px; }
 .card:nth-child(1) { animation-delay: 0.2s; }
 .card:nth-child(2) { animation-delay: 0.3s; }
 
-.card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(255, 107, 157, 0.2); }
+.card:hover { transform: translateY(-10px); box-shadow: var(--shadow-xl); }
 
 .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
 
 .card-icon {
-    width: 50px; height: 50px; border-radius: 12px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    width: 50px; height: 50px; border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     display: flex; align-items: center; justify-content: center;
-    font-size: 28px; box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    font-size: 28px; box-shadow: var(--shadow-md);
 }
 
 .card-title { font-size: 20px; font-weight: 700; color: #1a1a1a; }
@@ -85,13 +113,13 @@ main { display: flex; flex-direction: column; gap: 30px; }
 
 .stat {
     font-size: 24px; font-weight: 800;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
 .badge {
     display: inline-block;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white; padding: 5px 12px; border-radius: 20px;
     font-size: 12px; font-weight: 600;
 }
@@ -104,9 +132,9 @@ main { display: flex; flex-direction: column; gap: 30px; }
 }
 
 .stat-box {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
-    border-radius: 15px; padding: 25px; color: white;
-    text-align: center; box-shadow: 0 8px 32px rgba(255, 107, 157, 0.25);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: var(--radius-xl); padding: 25px; color: white;
+    text-align: center; box-shadow: var(--shadow-lg);
     transition: all 0.3s ease;
 }
 
@@ -118,58 +146,58 @@ main { display: flex; flex-direction: column; gap: 30px; }
 .prompts-section { animation: slideInUp 0.9s ease-out 0.3s backwards; }
 
 .prompts-section h2 {
-    font-size: 26px; font-weight: 800; margin-bottom: 20px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 22px; font-weight: 800; margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
 .btn-new {
     display: inline-block;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
-    color: white; padding: 12px 24px; border-radius: 10px;
-    text-decoration: none; font-weight: 700; font-size: 14px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white; padding: 10px 18px; border-radius: var(--radius-md);
+    text-decoration: none; font-weight: 700; font-size: 13px;
     margin-bottom: 20px; transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    box-shadow: var(--shadow-md);
 }
 
-.btn-new:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4); }
+.btn-new:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
 .prompts-table {
     width: 100%; border-collapse: collapse; background: white;
-    border-radius: 15px; overflow: hidden;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
+    border-radius: var(--radius-xl); overflow: hidden;
+    box-shadow: var(--shadow-lg);
 }
 
 .prompts-table th {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white; padding: 15px 20px; text-align: left;
     font-size: 13px; font-weight: 700; text-transform: uppercase;
 }
 
 .prompts-table td {
-    padding: 15px 20px; border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+    padding: 15px 20px; border-bottom: 1px solid var(--color-gray-border);
     font-size: 14px; color: #444;
 }
 
 .prompts-table tr:last-child td { border-bottom: none; }
-.prompts-table tr:hover td { background: rgba(255, 107, 157, 0.04); }
+.prompts-table tr:hover td { background: rgba(79, 70, 229, 0.04); }
 
 .badge-cat {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
-    color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white; padding: 4px 10px; border-radius: var(--radius-2xl); font-size: 11px; font-weight: 600;
 }
 
 .btn-edit {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white; padding: 6px 12px; border-radius: 8px;
-    font-size: 12px; font-weight: 700; text-decoration: none; margin-right: 5px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white; padding: 5px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 700; text-decoration: none; margin-right: 5px;
     transition: all 0.2s ease;
 }
 
 .btn-delete {
-    background: linear-gradient(135deg, #ff4d4d, #c0392b);
-    color: white; border: none; padding: 6px 12px; border-radius: 8px;
-    font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none;
+    background: linear-gradient(135deg, var(--color-danger), #dc2626);
+    color: white; border: none; padding: 5px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: none;
     transition: all 0.2s ease;
 }
 
@@ -177,8 +205,8 @@ main { display: flex; flex-direction: column; gap: 30px; }
 
 .empty-state {
     text-align: center; padding: 50px; color: #999;
-    background: white; border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
+    background: white; border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
 }
 
 @media (max-width: 768px) {
@@ -191,7 +219,7 @@ main { display: flex; flex-direction: column; gap: 30px; }
 <main>
     <div class="dashboard-header">
         <h1>Welcome to PromptHub 🚀</h1>
-        <p>Bonjour <strong><?= htmlspecialchars($_SESSION['username'] ?? 'Developer') ?></strong> — gérez vos prompts efficacement</p>
+        <p>Hello <strong><?= htmlspecialchars($_SESSION['username'] ?? 'Developer') ?></strong> — manage your prompts efficiently</p>
     </div>
 
     <!-- CARDS avec vraies données -->
@@ -213,10 +241,10 @@ main { display: flex; flex-direction: column; gap: 30px; }
         <div class="card">
             <div class="card-header">
                 <div class="card-icon">🌐</div>
-                <div class="card-title">Total Plateforme</div>
+                <div class="card-title">Platform Total</div>
             </div>
             <div class="card-content">
-                <p class="card-description">Total prompts disponibles sur la plateforme.</p>
+                <p class="card-description">Total prompts available on the platform.</p>
                 <div class="card-footer">
                     <span class="stat"><?= $totalPromptsCount ?></span>
                     <span class="badge">Global</span>
@@ -229,30 +257,30 @@ main { display: flex; flex-direction: column; gap: 30px; }
     <div class="stats-container">
         <div class="stat-box">
             <div class="stat-box-number"><?= $myPromptsCount ?></div>
-            <div class="stat-box-label">Mes Prompts</div>
+            <div class="stat-box-label">My Prompts</div>
         </div>
         <div class="stat-box">
             <div class="stat-box-number"><?= $totalPromptsCount ?></div>
-            <div class="stat-box-label">Total Plateforme</div>
+            <div class="stat-box-label">Platform Total</div>
         </div>
     </div>
 
     <!-- LISTE DES PROMPTS -->
     <div class="prompts-section">
-        <h2>📋 Mes Prompts</h2>
-        <a href="create_prompt.php" class="btn-new">✨ Créer un nouveau prompt</a>
+        <h2>📋 My Prompts</h2>
+        <a href="create_prompt.php" class="btn-new">✨ Create New Prompt</a>
 
         <?php if (empty($prompts)): ?>
             <div class="empty-state">
-                <p>Vous n'avez encore aucun prompt. <a href="create_prompt.php">Créez votre premier prompt !</a></p>
+                <p>You don't have any prompts yet. <a href="create_prompt.php">Create your first prompt!</a></p>
             </div>
         <?php else: ?>
             <table class="prompts-table">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Titre</th>
-                        <th>Catégorie</th>
+                        <th>Title</th>
+                        <th>Category</th>
                         <th>Date</th>
                         <th>Actions</th>
                     </tr>
@@ -271,10 +299,10 @@ main { display: flex; flex-direction: column; gap: 30px; }
                         </td>
                         <td><?= date('d/m/Y', strtotime($p['created_at'])) ?></td>
                         <td>
-                            <a href="update_prompt.php?id=<?= $p['id'] ?>" class="btn-edit">✏️ Modifier</a>
+                            <a href="update_prompt.php?id=<?= $p['id'] ?>" class="btn-edit">✏️ Edit</a>
                             <a href="../controllers/promptController.php?delete_id=<?= $p['id'] ?>"
                                class="btn-delete"
-                               onclick="return confirm('Supprimer ce prompt ?')">🗑️ Supprimer</a>
+                               onclick="return confirm('Delete this prompt?')">🗑️ Delete</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

@@ -1,6 +1,6 @@
 <?php
 require_once '../config/db.php';
-require_once '../includes/auth.php'; // ✅ auth.php fait déjà session_start(), pas besoin de le rappeler
+require_once '../includes/auth.php'; // ✅ auth.php already does session_start(), no need to repeat
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../auth/login.php");
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 // Ce controller gère uniquement : edit et delete
 
 /**
- * --- MODIFIER UN PROMPT ---
+ * --- UPDATE A PROMPT ---
  */
 if (isset($_POST['edit_prompt'])) {
     $id          = intval($_POST['id']);
@@ -35,7 +35,7 @@ if (isset($_POST['edit_prompt'])) {
 }
 
 /**
- * --- SUPPRIMER UN PROMPT ---
+ * --- DELETE A PROMPT ---
  */
 if (isset($_GET['delete_id'])) {
     $id = intval($_GET['delete_id']);

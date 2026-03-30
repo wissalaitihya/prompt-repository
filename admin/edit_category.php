@@ -38,6 +38,34 @@ include '../includes/header.php';
 ?>
 
 <style>
+:root {
+    /* Couleurs */
+    --color-primary: #4f46e5;
+    --color-primary-dark: #4338ca;
+    --color-primary-light: #6366f1;
+    --color-secondary: #10b981;
+    --color-danger: #ef4444;
+    --color-background: #eef0f4;
+    --color-dark: #0b1120;
+    --color-gray-light: #f8fafc;
+    --color-gray-border: #e2e8f0;
+    --color-gray-text: #666666;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --radius-2xl: 24px;
+    
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -77,21 +105,21 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    background: rgba(255, 107, 157, 0.1);
-    color: #ff6b9d;
+    padding: 10px 16px;
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--color-primary);
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.3s ease;
     margin-bottom: 30px;
     animation: slideInLeft 0.6s ease-out;
-    border: 1px solid rgba(255, 107, 157, 0.2);
+    border: 1px solid rgba(79, 70, 229, 0.2);
 }
 
 .btn-back:hover {
-    background: rgba(255, 107, 157, 0.15);
+    background: rgba(79, 70, 229, 0.15);
     transform: translateX(-5px);
 }
 
@@ -102,8 +130,8 @@ main {
 
 /* Header Section */
 .admin-container h2 {
-    font-size: 36px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    font-size: 32px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -124,17 +152,17 @@ main {
 /* Form Card */
 .main-form {
     background: white;
-    border-radius: 15px;
+    border-radius: var(--radius-xl);
     padding: 40px;
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
-    border: 1px solid rgba(255, 107, 157, 0.2);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-gray-border);
     transition: all 0.3s ease;
     animation: slideInUp 0.6s ease-out 0.3s backwards;
 }
 
 .main-form:hover {
-    box-shadow: 0 12px 40px rgba(255, 107, 157, 0.15);
-    border-color: rgba(255, 107, 157, 0.3);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(79, 70, 229, 0.2);
 }
 
 /* Form Group */
@@ -155,15 +183,15 @@ main {
 
 .form-group label::after {
     content: '*';
-    color: #ff6b9d;
+    color: var(--color-primary);
     margin-left: 4px;
     font-weight: 900;
 }
 
 .form-group input {
-    padding: 14px 16px;
-    border: 2px solid rgba(255, 107, 157, 0.2);
-    border-radius: 12px;
+    padding: 12px 14px;
+    border: 2px solid var(--color-gray-border);
+    border-radius: var(--radius-lg);
     font-size: 14px;
     font-family: inherit;
     transition: all 0.3s ease;
@@ -172,9 +200,9 @@ main {
 
 .form-group input:focus {
     outline: none;
-    border-color: #ff6b9d;
-    box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
-    background: rgba(255, 107, 157, 0.02);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+    background: rgba(79, 70, 229, 0.01);
 }
 
 .form-group input::placeholder {
@@ -195,16 +223,16 @@ input[type="hidden"] {
 /* Submit Button */
 .btn-submit {
     flex: 1;
-    padding: 14px 28px;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
     border: none;
-    border-radius: 12px;
-    font-size: 16px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 24px rgba(255, 107, 157, 0.3);
+    box-shadow: var(--shadow-md);
     position: relative;
     overflow: hidden;
 }
@@ -224,7 +252,7 @@ input[type="hidden"] {
 
 .btn-submit:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(255, 107, 157, 0.4);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-submit:hover::before {
@@ -239,12 +267,12 @@ input[type="hidden"] {
 /* Cancel Button */
 .btn-cancel {
     flex: 1;
-    padding: 14px 28px;
-    background: rgba(255, 107, 157, 0.1);
-    color: #ff6b9d;
-    border: 2px solid rgba(255, 107, 157, 0.3);
-    border-radius: 12px;
-    font-size: 16px;
+    padding: 12px 24px;
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--color-primary);
+    border: 2px solid rgba(79, 70, 229, 0.3);
+    border-radius: var(--radius-md);
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -255,8 +283,8 @@ input[type="hidden"] {
 }
 
 .btn-cancel:hover {
-    background: rgba(255, 107, 157, 0.15);
-    border-color: rgba(255, 107, 157, 0.5);
+    background: rgba(79, 70, 229, 0.15);
+    border-color: rgba(79, 70, 229, 0.5);
     transform: translateY(-2px);
 }
 
