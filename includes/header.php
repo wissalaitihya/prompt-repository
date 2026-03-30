@@ -12,8 +12,41 @@ require_once '../config/db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PromptHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            /* Couleurs */
+            --color-primary: #4f46e5;
+            --color-primary-dark: #4338ca;
+            --color-primary-light: #6366f1;
+            --color-secondary: #10b981;
+            --color-danger: #ef4444;
+            --color-danger-dark: #dc2626;
+            --color-background: #eef0f4;
+            --color-dark: #0b1120;
+            --color-sidebar-dark: #1a1a2e;
+            --color-gray-light: #f8fafc;
+            --color-gray-border: #e2e8f0;
+            --color-gray-text: #666666;
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --radius-2xl: 24px;
+            
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -53,8 +86,8 @@ require_once '../config/db.php';
 
         body {
             display: flex;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffe6f0 100%);
+            font-family: 'Outfit', 'Segoe UI', Tahoma, sans-serif;
+            background: var(--color-background);
             min-height: 100vh;
         }
 
@@ -65,8 +98,8 @@ require_once '../config/db.php';
             top: 0;
             width: 280px;
             height: 100vh;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
-            box-shadow: 4px 0 15px rgba(255, 107, 157, 0.3);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -77,20 +110,20 @@ require_once '../config/db.php';
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 80px;
-            font-size: 28px;
+            height: 70px;
+            font-size: 26px;
             font-weight: bold;
             color: white;
             text-decoration: none;
             border-bottom: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c34a7b 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .logo:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
         }
 
@@ -124,13 +157,13 @@ require_once '../config/db.php';
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 15px 20px;
+            padding: 12px 18px;
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             background-color: rgba(255, 255, 255, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             border-left: 4px solid transparent;
             cursor: pointer;
@@ -196,17 +229,17 @@ require_once '../config/db.php';
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%);
+            padding: 12px 18px;
+            background: linear-gradient(135deg, var(--color-danger-dark) 0%, var(--color-danger) 100%);
             color: white;
             text-decoration: none;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
         }
@@ -225,9 +258,9 @@ require_once '../config/db.php';
         }
 
         .logout-btn:hover {
-            background: linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+            background: linear-gradient(135deg, var(--color-danger) 0%, var(--color-danger-dark) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .logout-btn:hover::before {
@@ -254,13 +287,13 @@ require_once '../config/db.php';
             bottom: 0;
             left: 280px;
             right: 0;
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.95) 0%, rgba(195, 74, 123, 0.95) 100%);
-            border-top: 2px solid rgba(255, 255, 255, 0.2);
-            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, #1a1a2e 100%);
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 40px;
             color: rgba(255, 255, 255, 0.9);
             text-align: center;
-            font-size: 14px;
-            box-shadow: 0 -4px 20px rgba(255, 107, 157, 0.3);
+            font-size: 13px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
         }
 
@@ -275,7 +308,7 @@ require_once '../config/db.php';
             margin-left: 280px;
             width: calc(100% - 280px);
             padding: 40px;
-            padding-bottom: 100px;
+            padding-bottom: 90px;
             animation: fadeIn 0.6s ease-out;
         }
 

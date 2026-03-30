@@ -6,10 +6,10 @@ USE prompt_repository ;
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 25 mars 2026 à 15:59
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
+-- Host: 127.0.0.1
+-- Generated: Wed. 25 March 2026 at 15:59
+-- Server version: 10.4.32-MariaDB
+-- PHP version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -22,13 +22,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `prompt`
+-- Database: `prompt`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Table structure for `categories`
 --
 
 CREATE TABLE `categories` (
@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `prompts`
+-- Table structure for `prompts`
 --
 
 CREATE TABLE `prompts` (
@@ -68,7 +68,7 @@ CREATE TABLE `prompts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `prompts`
+-- Dumping data for table `prompts`
 --
 
 INSERT INTO `prompts` (`id`, `title`, `content`, `user_id`, `category_id`, `created_at`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `prompts` (`id`, `title`, `content`, `user_id`, `category_id`, `crea
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for `users`
 --
 
 CREATE TABLE `users` (
@@ -91,33 +91,33 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`) VALUES
 (3, 'RootAdmin', 'admin@devgenius.com', '$2y$10$UnuwGzISXCac2pnWyA4DluKHgK.h8sEZHM5UM1zdChmySON/.V5Um', 'admin', '2026-03-24 15:34:01');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 ALTER TABLE `categories` AUTO_INCREMENT=8;
 ALTER TABLE `prompts` AUTO_INCREMENT=12;
 ALTER TABLE `users` AUTO_INCREMENT=7;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `prompts`
+-- Constraints for table `prompts`
 --
 ALTER TABLE `prompts`
   ADD CONSTRAINT `prompts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
