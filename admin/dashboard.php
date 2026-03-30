@@ -16,6 +16,15 @@ $stmt = $pdo->query("
     ORDER BY p.id DESC
 ");
 $prompts = $stmt->fetchAll();
+// best_user 
+    $bestUser = $pdo->query("
+        SELECT users.username, COUNT(prompts.id) AS total
+        FROM prompts
+        JOIN users ON prompts.user_id = users.id
+        GROUP BY users.id
+        ORDER BY total DESC
+        LIMIT 1
+    ")->fetch();
 ?>
 
 <style>
