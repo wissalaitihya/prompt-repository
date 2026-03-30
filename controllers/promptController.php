@@ -22,7 +22,7 @@ require_once '../includes/auth.php';
         
         header('Location: ../developer/dashboard.php');
         exit();
-}
+    }
 if (isset($_POST['edit_prompt'])) {
     $id = intval($_POST['id']);
     $title = trim($_POST['title']);

@@ -7,6 +7,15 @@ include '../includes/header.php';
 $userCount = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $promptCount = $pdo->query("SELECT COUNT(*) FROM prompts")->fetchColumn();
 $categoryCount = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn();
+
+$stmt = $pdo->query("
+    SELECT p.*, c.name as category_name, u.username 
+    FROM prompts p 
+    LEFT JOIN categories c ON p.category_id = c.id 
+    LEFT JOIN users u ON p.user_id = u.id 
+    ORDER BY p.id DESC
+");
+$prompts = $stmt->fetchAll();
 ?>
 
 <style>
@@ -221,6 +230,7 @@ main {
     }
 }
 </style>
+
 
 <main>
     <div class="dashboard-header">
