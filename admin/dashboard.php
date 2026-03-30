@@ -301,7 +301,7 @@ main {
                 <div class="progress-fill" style="width: 75%"></div>
             </div>
         </div>
-        //-----------------------------------------
+        
 
         <div class="stat-card">
             <div class="stat-title">Top Developer</div>
@@ -317,7 +317,7 @@ main {
         
         </div>
 
-        //-----------------------------------------
+    
 
     </div>
 
