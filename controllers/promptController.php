@@ -9,13 +9,13 @@ require_once '../includes/auth.php';
         exit();
  }
  
-     if (isset($_POST['add_prompt'])) {
+ if (isset($_POST['add_prompt'])) {
     $title = trim($_POST['title']);
     $content = trim($_POST['content']);
     $category_id = intval($_POST['category_id']);
     $user_id = $_SESSION['user_id'];
 
-    }
+    
     if (!empty($title) && !empty($content)) {
         $stmt = $pdo->prepare("INSERT INTO prompts (title, content, category_id, user_id) VALUES (?, ?, ?, ?)");
         $stmt->execute([$title, $content, $category_id, $user_id]);
@@ -23,6 +23,7 @@ require_once '../includes/auth.php';
         header('Location: ../developer/dashboard.php');
         exit();
     }
+}
 if (isset($_POST['edit_prompt'])) {
     $id = intval($_POST['id']);
     $title = trim($_POST['title']);
